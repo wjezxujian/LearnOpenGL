@@ -12,6 +12,7 @@ void processInput(GLFWwindow* window);
 //settings
 const uint32_t SCR_WIDHT = 800;
 const uint32_t SCR_HEIGHT = 600;
+float _visiavle = 0.5f;
 
 
 int main()
@@ -109,7 +110,34 @@ int main()
 	}
 	stbi_image_free(data);
 
+	//绑定第二个纹理
+	unsigned int texture2;
+	glGenTextures(1, &texture2);
+	glBindTexture(GL_TEXTURE_2D, texture2);
+	//为当前纹理设置环境
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//加载并生成纹理
+	stbi_set_flip_vertically_on_load(true);
+	data = stbi_load("source/image/awesomeface.png", &width, &height, &nrChannels, 0);
+	if (data)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		std::cout << "Failed to load texture2" << std::endl;
+	}
+	stbi_image_free(data);
+
 	Shader ourShader("shaders/shader_texture.vs", "shaders/shader_texture.fs");
+	ourShader.use();
+	ourShader.setUniformValue("ourTexture", 0);
+	glUniform1i(glGetUniformLocation(ourShader.getShaderID(), "ourTexture2"), 1);
+	ourShader.setUniformValue("visiable", _visiavle);
 
 	//renderLoop
 	while (!glfwWindowShouldClose(window))
@@ -122,13 +150,17 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		//绘制矩形
-		ourShader.use();
+		ourShader.setUniformValue("visiable", _visiavle);
+		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, texture2);
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 
 		//检查并调用事件，交换缓冲
+		ourShader.use();
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
@@ -145,6 +177,16 @@ void processInput(GLFWwindow* window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
+	else if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+	{
+		_visiavle -= 0.005;
+		_visiavle = _visiavle < 0.0f ? 0.0f : _visiavle;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+	{
+		_visiavle += 0.005;
+		_visiavle = _visiavle > 1.0f ? 1.0f : _visiavle;
+	}
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
