@@ -70,11 +70,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)Libraries\include\;$(SolutionDir)Libraries\include\glad\;$(SolutionDir)Libraries\include\GLFW\;$(SolutionDir)Libraries\include\KHR\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Libraries\include\;$(SolutionDir)Libraries\include\glad\;$(SolutionDir)Libraries\include\GLFW\;$(SolutionDir)Libraries\include\KHR\;$(SolutionDir)StdImage;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Libraries\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Libraries\include\;$(SolutionDir)Libraries\include\glad\;$(SolutionDir)Libraries\include\GLFW\;$(SolutionDir)Libraries\include\KHR\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(SolutionDir)Libraries\include\;$(SolutionDir)Libraries\include\glad\;$(SolutionDir)Libraries\include\GLFW\;$(SolutionDir)Libraries\include\KHR\;$(SolutionDir)StdImage;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Libraries\lib\;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -125,11 +125,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\glad\glad.c" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="mainHistory.cpp" />
+    <ClCompile Include="..\StdImage\stb_image.cpp" />
+    <ClCompile Include="mainTexture.cpp" />
+    <ClCompile Include="mainShader.cpp" />
+    <ClCompile Include="mainTriangle.cpp" />
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\StdImage\stb_image.h" />
     <ClInclude Include="Shader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
