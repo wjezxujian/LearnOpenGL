@@ -74,7 +74,7 @@
     <LibraryPath>$(SolutionDir)Libraries\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Libraries\include\;$(SolutionDir)Libraries\include\glad\;$(SolutionDir)Libraries\include\GLFW\;$(SolutionDir)Libraries\include\KHR\;$(SolutionDir)StdImage;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Libraries\include\;$(SolutionDir)Libraries\include\glad\;$(SolutionDir)Libraries\include\GLFW\;$(SolutionDir)Libraries\include\KHR\;$(SolutionDir)Libraries\include\glm;$(SolutionDir)StdImage;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Libraries\lib\;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -128,6 +128,7 @@
     <ClCompile Include="..\StdImage\stb_image.cpp" />
     <ClCompile Include="mainTexture.cpp" />
     <ClCompile Include="mainShader.cpp" />
+    <ClCompile Include="mainTransformations.cpp" />
     <ClCompile Include="mainTriangle.cpp" />
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
