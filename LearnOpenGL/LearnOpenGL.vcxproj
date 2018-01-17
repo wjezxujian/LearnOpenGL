@@ -126,6 +126,9 @@
   <ItemGroup>
     <ClCompile Include="..\glad\glad.c" />
     <ClCompile Include="..\StdImage\stb_image.cpp" />
+    <ClCompile Include="mainCamera.cpp" />
+    <ClCompile Include="mainCoordSys.cpp" />
+    <ClCompile Include="mainCoordSys1.cpp" />
     <ClCompile Include="mainTexture.cpp" />
     <ClCompile Include="mainShader.cpp" />
     <ClCompile Include="mainTransformations.cpp" />

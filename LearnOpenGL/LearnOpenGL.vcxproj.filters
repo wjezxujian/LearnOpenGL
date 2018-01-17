@@ -36,6 +36,15 @@
     <ClCompile Include="mainTransformations.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="mainCoordSys.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="mainCoordSys1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="mainCamera.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">

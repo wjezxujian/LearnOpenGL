@@ -47,8 +47,8 @@
 //	//设置顶点数据（和缓冲区）并配置顶点属性
 //	float vertices[] = {
 //		//---- 位置 ----       ---- 颜色 ----     --纹理坐标--
-//		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // 右上
-//		 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // 右下
+//		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // 右上
+//		0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // 右下
 //		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // 左下
 //		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // 左上
 //	};
@@ -137,7 +137,7 @@
 //	}
 //	stbi_image_free(data);
 //
-//	Shader ourShader("shaders/shader_transformation.vs", "shaders/shader_transformation.fs");
+//	Shader ourShader("shaders/shader_coordsys.vs", "shaders/shader_coordsys.fs");
 //	ourShader.use();
 //	ourShader.setUniformValue("ourTexture", 0);
 //	glUniform1i(glGetUniformLocation(ourShader.getShaderID(), "ourTexture2"), 1);
@@ -155,6 +155,17 @@
 //	unsigned int transformLoc = glGetUniformLocation(ourShader.getShaderID(), "transform");
 //	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));*/
 //
+//	//模型矩阵
+//	glm::mat4 model;
+//	model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+//	//视图矩阵，注意，我们将矩阵向我们要进行移动场景的反方向移动
+//	glm::mat4 view;
+//	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+//	//投影矩阵
+//	glm::mat4 projection;
+//	projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDHT / (float)SCR_HEIGHT, 0.1f, 100.0f);
+//	
+//
 //	//renderLoop
 //	while (!glfwWindowShouldClose(window))
 //	{
@@ -167,24 +178,19 @@
 //
 //		//绘制矩形
 //		ourShader.setUniformValue("visiable", _visiavle);
-//		glm::mat4 trans;
-//		trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
-//		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
-//		unsigned int transformLoc = glGetUniformLocation(ourShader.getShaderID(), "transform");
-//		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+//		//传入矩阵
+//		int modelLoc = glGetUniformLocation(ourShader.getShaderID(), "model");
+//		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+//		int viewLoc = glGetUniformLocation(ourShader.getShaderID(), "view");
+//		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+//		int perspectivelLoc = glGetUniformLocation(ourShader.getShaderID(), "projection");
+//		glUniformMatrix4fv(perspectivelLoc, 1, GL_FALSE, glm::value_ptr(projection));
 //
 //		glActiveTexture(GL_TEXTURE0);
 //		glBindTexture(GL_TEXTURE_2D, texture);
 //		glActiveTexture(GL_TEXTURE1);
 //		glBindTexture(GL_TEXTURE_2D, texture2);
 //		glBindVertexArray(VAO);
-//		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-//
-//		glm::mat4 trans2;
-//		trans2 = glm::translate(trans2, glm::vec3(-0.5f, 0.5f, 0.0f));
-//		trans2 = glm::scale(trans2, glm::vec3(1.0f, 1.0f, 1.0f) * abs(glm::sin(float(glfwGetTime()))));
-//		transformLoc = glGetUniformLocation(ourShader.getShaderID(), "transform");
-//		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans2));
 //		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 //
 //
