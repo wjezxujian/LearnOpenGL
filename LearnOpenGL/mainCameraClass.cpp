@@ -1,4 +1,5 @@
 //#include "Shader.h"
+//#include "Camera.h"
 //#include "stb_image.h"
 //
 //#include <glad/glad.h>
@@ -15,26 +16,18 @@
 //void mouseCallback(GLFWwindow* window, double xpos, double ypos);
 //void scrollBack(GLFWwindow* window, double xoffset, double yoffset);
 //
-////settings
+////设置
 //const uint32_t SCR_WIDHT = 800;
 //const uint32_t SCR_HEIGHT = 600;
 //float _visiavle = 0.2f;
 //
-//glm::vec3 cameraPos		= glm::vec3(0.0f, 0.0f,  3.0f);
-//glm::vec3 cameraFront	= glm::vec3(0.0f, 0.0f, -1.0f);
-//glm::vec3 cameraUp		= glm::vec3(0.0f, 1.0f, 0.0f);
+//Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+//float lastX = SCR_WIDHT / 2.0;
+//float lastY = SCR_HEIGHT / 2.0;
+//bool isFirstMouse = true;
 //
 //float deltaTime = 0.0f; //当前帧与上一帧的时间差
 //float lastFrame = 0.0f;	//上一帧的事件
-//
-//float pitch = 0.f;
-//float yaw	= -90.f;
-//float lastX = 800.0f / 2.0;
-//float lastY = 600.0 / 2.0;
-//bool isFirstMouse = true;
-//
-//float fov	= 45.f;
-//
 //
 //int main()
 //{
@@ -202,16 +195,6 @@
 //	glUniform1i(glGetUniformLocation(ourShader.getShaderID(), "ourTexture2"), 1);
 //	ourShader.setUniformValue("visiable", _visiavle);
 //
-//	//模型矩阵
-//	/*glm::mat4 model;
-//	model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));*/
-//	//视图矩阵，注意，我们将矩阵向我们要进行移动场景的反方向移动
-//	glm::mat4 view;
-//	//view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-//	//投影矩阵
-//	glm::mat4 projection;
-//	
-//
 //	//开启深度缓冲
 //	glEnable(GL_DEPTH_TEST);
 //
@@ -221,6 +204,7 @@
 //	//renderLoop
 //	while (!glfwWindowShouldClose(window))
 //	{
+//		//每一帧时间逻辑
 //		float currentFrame = glfwGetTime();
 //		deltaTime = currentFrame - lastFrame;
 //		lastFrame = currentFrame;
@@ -234,25 +218,10 @@
 //
 //		//绘制矩形
 //		ourShader.setUniformValue("visiable", _visiavle);
-//		//传入矩阵单个旋转
-//		/*double time = glfwGetTime();
-//		float _rotate = glm::radians(50.0f * time);
-//		glm::mat4 model;
-//		model = glm::rotate(model, _rotate, glm::vec3(0.5f, 1.0f, 0.0f));
-//		int modelLoc = glGetUniformLocation(ourShader.getShaderID(), "model");
-//		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));*/
-//
-//		////变换摄像机
-//		//float radius = 10.0f;
-//		//float camX = sin(glfwGetTime()) * radius;
-//		//float camZ = cos(glfwGetTime()) * radius;
-//		//glm::mat4 view;
-//		//view = glm::lookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
-//
-//		view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+//		glm::mat4 view = camera.GetViewMatrix();
 //		int viewLoc = glGetUniformLocation(ourShader.getShaderID(), "view");
 //		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-//		projection = glm::perspective(glm::radians(fov), (float)SCR_WIDHT / ((float)SCR_HEIGHT), 0.1f, 100.0f);
+//		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDHT / (float)SCR_HEIGHT, 0.1f, 100.0f);
 //		int perspectivelLoc = glGetUniformLocation(ourShader.getShaderID(), "projection");
 //		glUniformMatrix4fv(perspectivelLoc, 1, GL_FALSE, glm::value_ptr(projection));
 //
@@ -266,15 +235,12 @@
 //		{
 //			glm::mat4 model;
 //			model = glm::translate(model, cubePositions[i]);
-//			float angle = 20.0f * i +20 * glfwGetTime();
+//			float angle = 20.0f * i + 20 * glfwGetTime();
 //			model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
 //			int modelLoc = glGetUniformLocation(ourShader.getShaderID(), "model");
 //			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 //			glDrawArrays(GL_TRIANGLES, 0, 36);
 //		}
-//
-//		//glDrawArrays(GL_TRIANGLES, 0, 36);
-//
 //
 //		//检查并调用事件，交换缓冲
 //		ourShader.use();
@@ -293,22 +259,24 @@
 //{
 //	float cameraSpeed = 2.5f * deltaTime;	//adjust accordingly
 //	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+//	{
 //		glfwSetWindowShouldClose(window, true);
-//	else if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-//	{
-//		cameraPos += cameraSpeed * cameraFront;
 //	}
-//	else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+//	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 //	{
-//		cameraPos -= cameraSpeed * cameraFront;
+//		camera.ProcessKeyboard(FORWARD, deltaTime);
 //	}
-//	else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+//	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 //	{
-//		cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+//		camera.ProcessKeyboard(BACKWARD, deltaTime);
 //	}
-//	else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+//	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 //	{
-//		cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+//		camera.ProcessKeyboard(LEFT, deltaTime);
+//	}
+//	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+//	{
+//		camera.ProcessKeyboard(RIGHT, deltaTime);
 //	}
 //}
 //
@@ -326,33 +294,12 @@
 //	lastX = xpos;
 //	lastY = ypos;
 //
-//	float sensitivity = 0.05f;
-//	xOffset *= sensitivity;
-//	yOffset *= sensitivity;
-//
-//	yaw += xOffset;
-//	pitch += yOffset;
-//
-//	if (pitch > 89.0f)
-//		pitch = 89.0f;
-//	if (pitch < -89.0f)
-//		pitch = -89.0f;
-//
-//	glm::vec3 front;
-//	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-//	front.y = sin(glm::radians(pitch));
-//	front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-//	cameraFront = glm::normalize(front);
+//	camera.ProcessMouseMovement(xOffset, yOffset);
 //}
 //
 //void scrollBack(GLFWwindow * window, double xoffset, double yoffset)
 //{
-//	if (fov >= 1.0f && fov <= 45.0f)
-//		fov -= yoffset;
-//	if (fov <= 1.0f)
-//		fov = 1.0f;
-//	if (fov >= 45.0f)
-//		fov = 45.0f;
+//	camera.ProcessMouseScroll(yoffset);
 //}
 //
 //void framebuffer_size_callback(GLFWwindow* window, int width, int height)
