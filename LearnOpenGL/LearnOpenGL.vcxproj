@@ -134,6 +134,7 @@
     <ClCompile Include="mainLight.cpp" />
     <ClCompile Include="mainLightCasters.cpp" />
     <ClCompile Include="mainLightingMaps.cpp" />
+    <ClCompile Include="mainLightMultiple.cpp" />
     <ClCompile Include="mainMaterial.cpp" />
     <ClCompile Include="mainTexture.cpp" />
     <ClCompile Include="mainShader.cpp" />
