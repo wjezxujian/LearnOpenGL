@@ -132,6 +132,7 @@
     <ClCompile Include="mainCoordSys.cpp" />
     <ClCompile Include="mainCoordSys1.cpp" />
     <ClCompile Include="mainLight.cpp" />
+    <ClCompile Include="mainLightingMaps.cpp" />
     <ClCompile Include="mainMaterial.cpp" />
     <ClCompile Include="mainTexture.cpp" />
     <ClCompile Include="mainShader.cpp" />
