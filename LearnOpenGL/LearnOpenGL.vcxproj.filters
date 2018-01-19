@@ -66,6 +66,12 @@
     <ClCompile Include="mainLightMultiple.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="mainAssimp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
