@@ -217,7 +217,7 @@ int main()
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-		glStencilMask(0xFF);
+		glStencilMask(0x00);
 		glDisable(GL_DEPTH_TEST);
 		shaderSingleColor.use();
 		float scale = 1.1f;
