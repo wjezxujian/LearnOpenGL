@@ -138,6 +138,7 @@
     <ClCompile Include="mainLightingMaps.cpp" />
     <ClCompile Include="mainLightMultiple.cpp" />
     <ClCompile Include="mainMaterial.cpp" />
+    <ClCompile Include="mainStencilTest.cpp" />
     <ClCompile Include="mainTexture.cpp" />
     <ClCompile Include="mainShader.cpp" />
     <ClCompile Include="mainTransformations.cpp" />
