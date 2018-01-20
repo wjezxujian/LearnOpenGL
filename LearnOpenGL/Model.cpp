@@ -1,5 +1,10 @@
 #include "Model.h"
+#include "Mesh.h"
 #include "stb_image.h"
+
+#include <iostream>
+
+unsigned int TextureFromFile(const char* path, const std::string& directory, bool gamma = false);
 
 void Model::Draw(Shader shader)
 {
@@ -88,6 +93,10 @@ Mesh Model::processMesh(aiMesh * mesh, const aiScene * scene)
 		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 		std::vector<Texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+		std::vector<Texture> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
+		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+		std::vector<Texture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
+		textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 	}
 
 	return Mesh(vertices, indices, textures);
@@ -119,7 +128,7 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial * mat, aiTextureType
 	return textures;
 }
 
-unsigned int TextureFromFile(const char* path, const std::string& directory, bool gamma = false)
+unsigned int TextureFromFile(const char* path, const std::string& directory, bool gamma)
 {
 	std::string filename = std::string(path);
 	filename = directory + '/' + filename;
@@ -141,6 +150,7 @@ unsigned int TextureFromFile(const char* path, const std::string& directory, boo
 
 		glBindTexture(GL_TEXTURE_2D, textureID);
 		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -148,7 +158,6 @@ unsigned int TextureFromFile(const char* path, const std::string& directory, boo
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 		stbi_image_free(data);
-
 	}
 	else
 	{

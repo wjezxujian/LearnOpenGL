@@ -132,6 +132,7 @@
     <ClCompile Include="mainCameraClass.cpp" />
     <ClCompile Include="mainCoordSys.cpp" />
     <ClCompile Include="mainCoordSys1.cpp" />
+    <ClCompile Include="mainDepthTest.cpp" />
     <ClCompile Include="mainLight.cpp" />
     <ClCompile Include="mainLightCasters.cpp" />
     <ClCompile Include="mainLightingMaps.cpp" />
@@ -141,13 +142,14 @@
     <ClCompile Include="mainShader.cpp" />
     <ClCompile Include="mainTransformations.cpp" />
     <ClCompile Include="mainTriangle.cpp" />
-    <ClCompile Include="Mesh.h" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\StdImage\stb_image.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Shader.h" />
   </ItemGroup>
