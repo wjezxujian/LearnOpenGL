@@ -232,11 +232,14 @@ int main()
 
 	//编译Shaders
 	Shader shader("shaders/shader_skybox.vs", "shaders/shader_skybox.fs");
+	Shader ourShader("shaders/shader_skybox_nanosuit.vs", "shaders/shader_skybox_nanosuit.fs");
 
 
 	Shader skyboxShader("shaders/shader_cubemaps.vs", "shaders/shader_cubemaps.fs");
 	skyboxShader.use();
 	skyboxShader.setUniformValue("skybox", 0);
+
+	Model ourModel("objects/nanosuit/nanosuit.obj");
 
 
 	//创建帧缓冲对象
@@ -299,14 +302,24 @@ int main()
 		glm::mat4 model;
 		glm::mat4 view = camera.GetViewMatrix();
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.f);
-		shader.setMat4("model", model);
+		/*shader.setMat4("model", model);
 		shader.setMat4("view", view);
 		shader.setMat4("projection", projection);
 		shader.setVec3("cameraPos", camera.Position);
 		glBindVertexArray(cubeVAO);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glDrawArrays(GL_TRIANGLES, 0, 36);*/
+
+
+		ourShader.use();
+		ourShader.setVec3("viewPos", camera.Position);
+		ourShader.setMat4("view", view);
+		ourShader.setMat4("projection", projection);
+		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
+		ourShader.setMat4("model", model);
+		ourModel.Draw(ourShader);
 
 
 		glDepthFunc(GL_LEQUAL);

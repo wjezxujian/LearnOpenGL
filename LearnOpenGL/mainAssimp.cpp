@@ -16,7 +16,6 @@
 //void processInput(GLFWwindow* window);
 //void mouseCallback(GLFWwindow* window, double xpos, double ypos);
 //void scrollBack(GLFWwindow* window, double xoffset, double yoffset);
-//unsigned int loadTexture(char const* path);
 //
 ////…Ë÷√
 //const uint32_t SCR_WIDHT = 800;
