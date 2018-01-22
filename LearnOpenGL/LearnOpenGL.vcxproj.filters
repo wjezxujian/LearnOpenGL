@@ -84,6 +84,15 @@
     <ClCompile Include="mainBlending.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="mainCulling.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="mainFrameBuffers.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="mainCubemaps.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">

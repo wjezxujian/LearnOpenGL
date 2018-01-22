@@ -133,7 +133,10 @@
     <ClCompile Include="mainCameraClass.cpp" />
     <ClCompile Include="mainCoordSys.cpp" />
     <ClCompile Include="mainCoordSys1.cpp" />
+    <ClCompile Include="mainCubemaps.cpp" />
+    <ClCompile Include="mainCulling.cpp" />
     <ClCompile Include="mainDepthTest.cpp" />
+    <ClCompile Include="mainFrameBuffers.cpp" />
     <ClCompile Include="mainLight.cpp" />
     <ClCompile Include="mainLightCasters.cpp" />
     <ClCompile Include="mainLightingMaps.cpp" />

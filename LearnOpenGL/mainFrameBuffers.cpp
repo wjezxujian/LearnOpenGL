@@ -19,6 +19,7 @@
 //void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 //void processInput(GLFWwindow* window);
 //unsigned int loadTexture(const char* path);
+//unsigned int loadCubemap(std::vector<std::string> faces);
 //
 ////窗口大小
 //const unsigned int SCR_WIDTH = 1280;
@@ -73,86 +74,77 @@
 //	glEnable(GL_DEPTH_TEST);
 //	glDepthFunc(GL_LESS);
 //
-//	glEnable(GL_STENCIL_TEST);
-//	glStencilFunc(GL_ALWAYS, 1, 0xFF);	//所有的片段都应该更新模板缓冲
-//	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-//
-//	glEnable(GL_BLEND);
-//	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//	/*glEnable(GL_CULL_FACE);
+//	glCullFace(GL_BACK);*/
+//	//glFrontFace(GL_CW);
 //
 //	//设置顶点数据，配置顶点属性
 //	float cubeVertices[] = {
-//		//位置         //纹理坐标
-//		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-//		0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-//		0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-//		0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-//		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-//		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-//
-//		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-//		0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-//		0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-//		0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-//		-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-//		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-//
-//		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-//		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-//		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-//		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-//		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-//		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-//
-//		0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-//		0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-//		0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-//		0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-//		0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-//		0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-//
-//		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-//		0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-//		0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-//		0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-//		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-//		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-//
-//		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-//		0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-//		0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-//		0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-//		-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-//		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+//		// Back face
+//		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // Bottom-left
+//		0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-right
+//		0.5f, -0.5f, -0.5f,  1.0f, 0.0f, // bottom-right         
+//		0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-right
+//		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // bottom-left
+//		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // top-left
+//		// Front face
+//		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-left
+//		0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // bottom-right
+//		0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // top-right
+//		0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // top-right
+//		-0.5f,  0.5f,  0.5f,  0.0f, 1.0f, // top-left
+//		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-left
+//		// Left face
+//		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // top-right
+//		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-left
+//		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // bottom-left
+//		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // bottom-left
+//		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-right
+//		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // top-right
+//		// Right face
+//		0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // top-left
+//		0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // bottom-right
+//		0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-right         
+//		0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // bottom-right
+//		0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // top-left
+//		0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-left     
+//		// Bottom face
+//		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // top-right
+//		0.5f, -0.5f, -0.5f,  1.0f, 1.0f, // top-left
+//		0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // bottom-left
+//		0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // bottom-left
+//		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-right
+//		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // top-right
+//		// Top face
+//		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // top-left
+//		0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // bottom-right
+//		0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-right     
+//		0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // bottom-right
+//		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // top-left
+//		-0.5f,  0.5f,  0.5f,  0.0f, 0.0f  // bottom-left        
 //	};
+//
 //	float planeVertices[] = {
 //		//位置          //纹理坐标（纹理坐标大于1，将导致地板纹理重复）
-//		5.0f, -0.5f,  5.0f,  16.0f, 0.0f,
-//		-5.0f, -0.5f,  5.0f,  0.0f, 0.0f,
-//		-5.0f, -0.5f, -5.0f,  0.0f, 16.0f,
+//		5.0f, -0.5f,  5.0f,  16.0f,  0.0f,
+//		-5.0f, -0.5f,  5.0f,   0.0f,  0.0f,
+//		-5.0f, -0.5f, -5.0f,   0.0f, 16.0f,
 //
-//		5.0f, -0.5f,  5.0f,  16.0f, 0.0f,
-//		-5.0f, -0.5f, -5.0f,  0.0f, 16.0f,
+//		5.0f, -0.5f,  5.0f,  16.0f,  0.0f,
+//		-5.0f, -0.5f, -5.0f,   0.0f, 16.0f,
 //		5.0f, -0.5f, -5.0f,  16.0f, 16.0f
 //	};
+//	
+//	float quadVertices[] = {
+//		// positions   // texCoords
+//		-1.0f,  1.0f,  0.0f, 1.0f,
+//		-1.0f, -1.0f,  0.0f, 0.0f,
+//		 1.0f, -1.0f,  1.0f, 0.0f,
 //
-//	float transparentVertices[] = {
-//		//位置            //纹理坐标
-//		0.0f,  0.5f,  0.0f,  0.0f,  0.0f,
-//		0.0f, -0.5f,  0.0f,  0.0f,  1.0f,
-//		1.0f, -0.5f,  0.0f,  1.0f,  1.0f,
-//
-//		0.0f,  0.5f,  0.0f,  0.0f,  0.0f,
-//		1.0f, -0.5f,  0.0f,  1.0f,  1.0f,
-//		1.0f,  0.5f,  0.0f,  1.0f,  0.0f
+//		-1.0f,  1.0f,  0.0f, 1.0f,
+//		 1.0f, -1.0f,  1.0f, 0.0f,
+//		 1.0f,  1.0f,  1.0f, 1.0f
 //	};
-//
-//	std::vector<glm::vec3> vegetation;
-//	vegetation.push_back(glm::vec3(-1.5f, 0.0f, -0.48f));
-//	vegetation.push_back(glm::vec3( 1.5f, 0.0f,  0.51f));
-//	vegetation.push_back(glm::vec3( 0.0f, 0.0f,  0.70f));
-//	vegetation.push_back(glm::vec3(-0.3f, 0.0f, -2.30f));
-//	vegetation.push_back(glm::vec3( 0.5f, 0.0f, -0.60f));
 //
 //	//立方体VAO
 //	unsigned cubeVAO, cubeVBO;
@@ -177,44 +169,68 @@
 //	glEnableVertexAttribArray(0);
 //	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 //	glEnableVertexAttribArray(1);
-//	glBindVertexArray(0);
-//	//草地vegetationVAO
-//	unsigned vegetationVAO, vegetationVBO;
-//	glGenVertexArrays(1, &vegetationVAO);
-//	glGenBuffers(1, &vegetationVBO);
-//	glBindVertexArray(vegetationVAO);
-//	glBindBuffer(GL_ARRAY_BUFFER, vegetationVBO);
-//	glBufferData(GL_ARRAY_BUFFER, sizeof(transparentVertices), &transparentVertices, GL_STATIC_DRAW);
-//	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+//	//场景矩形VO
+//	unsigned quadVAO, quadVBO;
+//	glGenVertexArrays(1, &quadVAO);
+//	glGenBuffers(1, &quadVBO);
+//	glBindVertexArray(quadVAO);
+//	glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
+//	glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+//	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
 //	glEnableVertexAttribArray(0);
-//	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+//	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
 //	glEnableVertexAttribArray(1);
-//	glBindVertexArray(0);
-//
-//	//窗户排序
-//	std::map<float, glm::vec3> sorted;
-//	for (unsigned int i = 0; i < vegetation.size(); ++i)
-//	{
-//		float distance = glm::length(camera.Position - vegetation[i]);
-//		sorted[distance] = vegetation[i];
-//	}
-//
-//	
 //
 //	//加载纹理
-//	unsigned int cubeTexture = loadTexture("source/image/marble.jpg");
-//	unsigned int planeTexture = loadTexture("source/image/timg.jpg");
-//	unsigned int grassTexture = loadTexture("source/image/grass.png");
-//	unsigned int windowTexture = loadTexture("source/image/window.png");
+//	unsigned int cubeTexture = loadTexture("source/image/container.jpg");
+//	unsigned int planeTexture = loadTexture("source/image/metal.png");
 //
 //	//编译Shaders
 //	Shader shader("shaders/shader_blending.vs", "shaders/shader_blending.fs");
 //	shader.use();
 //	shader.setUniformValue("texturel", 0);
 //
-//	Shader shaderSingleColor("shaders/shader_single_color.vs", "shaders/shader_single_color.fs");
+//	Shader screenShader("shaders/shader_framebuffer.vs", "shaders/shader_framebuffer.fs");
+//	screenShader.use();
+//	screenShader.setUniformValue("screenTexture", 0);
 //
-//	Shader shaderGrass("shaders/shader_grass.vs", "shaders/shader_grass.fs");
+//	//创建帧缓冲对象
+//	unsigned int framebuffer;
+//	glGenFramebuffers(1, &framebuffer);
+//	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+//
+//	//生成纹理
+//	unsigned int texColorBuffer;
+//	glGenTextures(1, &texColorBuffer);
+//	glBindTexture(GL_TEXTURE_2D, texColorBuffer);
+//	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCR_WIDTH, SCR_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+//	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+//	glBindTexture(GL_TEXTURE_2D, 0);
+//
+//	//将它附加到当前绑定的帧缓冲对象
+//	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texColorBuffer, 0);
+//
+//	//创建一个渲染缓冲对象
+//	unsigned int rbo;
+//	glGenRenderbuffers(1, &rbo);
+//	glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+//	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, SCR_WIDTH, SCR_HEIGHT);
+//	glBindRenderbuffer(GL_RENDERBUFFER, 0);
+//
+//	//将渲染缓冲对象附加到帧缓冲对象
+//	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
+//
+//	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+//		std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
+//	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+//
+//
+//
+//	//调用线框模式绘制多边形
+//	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 //
 //	//循环
 //	while (!glfwWindowShouldClose(window))
@@ -227,31 +243,20 @@
 //		//输入
 //		processInput(window);
 //
+//		glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+//		glEnable(GL_DEPTH_TEST);
+//
 //		//渲染
 //		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-//		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+//		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 //
-//		shaderSingleColor.use();
+//		shader.use();
 //		glm::mat4 model;
 //		glm::mat4 view = camera.GetViewMatrix();
 //		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.f);
-//		shaderSingleColor.setMat4("view", view);
-//		shaderSingleColor.setMat4("projection", projection);  
-//
-//		shader.use();
 //		shader.setMat4("view", view);
 //		shader.setMat4("projection", projection);
 //
-//		//glStencilMask(0x00);
-//		//地板
-//		glBindVertexArray(planeVAO);
-//		glBindTexture(GL_TEXTURE_2D, planeTexture);
-//		shader.setMat4("model", glm::mat4());
-//		glDrawArrays(GL_TRIANGLES, 0, 6);
-//		glBindVertexArray(0);
-//
-//		/*glStencilFunc(GL_ALWAYS, 1, 0xFF);
-//		glStencilMask(0xFF);*/
 //		//立方体
 //		glBindVertexArray(cubeVAO);
 //		glActiveTexture(GL_TEXTURE0);
@@ -264,46 +269,27 @@
 //		shader.setMat4("model", model);
 //		glDrawArrays(GL_TRIANGLES, 0, 36);
 //
-//		//glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-//		//glStencilMask(0x00);
-//		//glDisable(GL_DEPTH_TEST);
-//		//shaderSingleColor.use();
-//		//float scale = 1.1f;
-//		////立方体描边
-//		//glBindVertexArray(cubeVAO);
-//		//glBindTexture(GL_TEXTURE_2D, cubeTexture);
-//		//model = glm::mat4();
-//		//model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
-//		//model = glm::scale(model, glm::vec3(scale, scale, scale));
-//		//shader.setMat4("model", model);
-//		//glDrawArrays(GL_TRIANGLES, 0, 36);
-//		//model = glm::mat4();
-//		//model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
-//		//model = glm::scale(model, glm::vec3(scale, scale, scale));
-//		//shaderSingleColor.setMat4("model", model);
-//		//glDrawArrays(GL_TRIANGLES, 0, 36);
-//		//glBindVertexArray(0);
-//		//glStencilMask(0xff);
-//		//glEnable(GL_DEPTH_TEST);
+//		//地板
+//		glBindVertexArray(planeVAO);
+//		glBindTexture(GL_TEXTURE_2D, planeTexture);
+//		shader.setMat4("model", glm::mat4());
+//		glDrawArrays(GL_TRIANGLES, 0, 6);
+//		glBindVertexArray(0);
 //
+//		
 //
-//		shaderGrass.use();
-//		shaderGrass.setMat4("view", view);
-//		shaderGrass.setMat4("projection", projection);
-//		glBindVertexArray(vegetationVAO);
-//		glBindTexture(GL_TEXTURE_2D, windowTexture);
-//		for (std::map<float, glm::vec3>::reverse_iterator it = sorted.rbegin(); it != sorted.rend(); ++it)
-//		{
-//			model = glm::mat4();
-//			model = glm::translate(model, it->second);
-//			shaderGrass.setMat4("model", model);
-//			glDrawArrays(GL_TRIANGLES, 0, 6);
-//		}
+//		//处理纹理
+//		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+//		glDisable(GL_DEPTH_TEST);
+//		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+//		glClear(GL_COLOR_BUFFER_BIT);
 //
-//		/*shader.use();
-//		shader.setMat4("view", view);
-//		shader.setMat4("projection", projection);*/
-//
+//		screenShader.use();
+//		glBindVertexArray(quadVAO);
+//		glDisable(GL_DEPTH_TEST);
+//		glActiveTexture(GL_TEXTURE0);
+//		glBindTexture(GL_TEXTURE_2D, texColorBuffer);
+//		glDrawArrays(GL_TRIANGLES, 0, 6);
 //
 //		//检查并调用事件，交换缓冲
 //		glfwSwapBuffers(window);
@@ -401,6 +387,37 @@
 //		std::cout << "Texture failed to load at path: " << path << std::endl;
 //		stbi_image_free(data);
 //	}
+//
+//	return textureID;
+//}
+//
+//unsigned int loadCubemap(std::vector<std::string> faces)
+//{
+//	unsigned int textureID;
+//	glGenTextures(1, &textureID);
+//	glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+//
+//	int width, height, nrChannels;
+//	for (unsigned int i = 0; i < faces.size(); ++i)
+//	{
+//		unsigned char* data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
+//		if (data)
+//		{
+//			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+//			stbi_image_free(data);
+//		}
+//		else
+//		{
+//			std::cout << "Cubemap texture failed to load at path: " << faces[i] << std::endl;
+//			stbi_image_free(data);
+//		}
+//	}
+//
+//	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+//	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+//	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 //
 //	return textureID;
 //}
