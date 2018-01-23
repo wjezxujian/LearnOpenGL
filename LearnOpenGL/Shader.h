@@ -7,7 +7,7 @@ class Shader
 {
 public:
 	//构造器读取并构建着色器
-	Shader(const GLchar* vertexPath, const GLchar* fragmentPath);
+	Shader(const GLchar* vertexPath, const GLchar* fragmentPath, const GLchar* geometryPath = nullptr);
 
 	//使用/激活程序
 	void use();
@@ -58,7 +58,17 @@ public:
         glUniformMatrix4fv(glGetUniformLocation(m_ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
     }
 
+	// ------------------------------------------------------------------------
+	void setBlock(const std::string &name, int value)
+	{
+		unsigned int uniformIndex = glGetUniformBlockIndex(m_ID, name.c_str());
+		glUniformBlockBinding(m_ID, uniformIndex, value);
+	}
+
 	unsigned getShaderID() { return m_ID; }
+
+private:
+	void checkCompileErrors(GLuint shader, std::string type);
 
 private:
 	unsigned m_ID;

@@ -127,6 +127,7 @@
     <ClCompile Include="..\glad\glad.c" />
     <ClCompile Include="..\StdImage\stb_image.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="mainAdvanceGLSL.cpp" />
     <ClCompile Include="mainAssimp.cpp" />
     <ClCompile Include="mainBlending.cpp" />
     <ClCompile Include="mainCamera.cpp" />
@@ -137,6 +138,7 @@
     <ClCompile Include="mainCulling.cpp" />
     <ClCompile Include="mainDepthTest.cpp" />
     <ClCompile Include="mainFrameBuffers.cpp" />
+    <ClCompile Include="mainGeometryShader.cpp" />
     <ClCompile Include="mainLight.cpp" />
     <ClCompile Include="mainLightCasters.cpp" />
     <ClCompile Include="mainLightingMaps.cpp" />

@@ -18,6 +18,4 @@ void main()
     vec3 refle = reflect(nor, normalize(Normal));
     //vec3 refle = refract(nor, normalize(Normal), ratio);
     FragColor = vec4(texture(skybox, refle).rgb, 1.0);
-    auto _texColor = texture(texture_height1TexCoords, )
-    FragColor = min(texture_height1 * );
 }

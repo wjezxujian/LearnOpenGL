@@ -80,124 +80,48 @@
 //
 //	//设置顶点数据，配置顶点属性
 //	float cubeVertices[] = {
-//		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-//		 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-//		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-//		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-//		-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-//		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-//
-//		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-//		 0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-//		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-//		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-//		-0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-//		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-//
-//		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-//		-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-//		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-//		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-//		-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-//		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-//
-//		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-//		 0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-//		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-//		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-//		 0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-//		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-//
-//		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-//		 0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-//		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-//		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-//		-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-//		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-//
-//		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-//		 0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-//		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-//		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-//		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-//		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
-//	};
-//
-//	float planeVertices[] = {
-//		//位置          //纹理坐标（纹理坐标大于1，将导致地板纹理重复）
-//		5.0f, -0.5f,  5.0f,  16.0f,  0.0f,
-//		-5.0f, -0.5f,  5.0f,   0.0f,  0.0f,
-//		-5.0f, -0.5f, -5.0f,   0.0f, 16.0f,
-//
-//		5.0f, -0.5f,  5.0f,  16.0f,  0.0f,
-//		-5.0f, -0.5f, -5.0f,   0.0f, 16.0f,
-//		5.0f, -0.5f, -5.0f,  16.0f, 16.0f
-//	};
-//
-//	float quadVertices[] = {
-//		// positions   // texCoords
-//		-1.0f,  1.0f,  0.0f, 1.0f,
-//		-1.0f, -1.0f,  0.0f, 0.0f,
-//		1.0f, -1.0f,  1.0f, 0.0f,
-//
-//		-1.0f,  1.0f,  0.0f, 1.0f,
-//		1.0f, -1.0f,  1.0f, 0.0f,
-//		1.0f,  1.0f,  1.0f, 1.0f
-//	};
-//
-//	float skyboxVertices[] = {
-//		// positions          
-//		-1.0f,  1.0f, -1.0f,
-//		-1.0f, -1.0f, -1.0f,
-//		1.0f, -1.0f, -1.0f,
-//		1.0f, -1.0f, -1.0f,
-//		1.0f,  1.0f, -1.0f,
-//		-1.0f,  1.0f, -1.0f,
-//
-//		-1.0f, -1.0f,  1.0f,
-//		-1.0f, -1.0f, -1.0f,
-//		-1.0f,  1.0f, -1.0f,
-//		-1.0f,  1.0f, -1.0f,
-//		-1.0f,  1.0f,  1.0f,
-//		-1.0f, -1.0f,  1.0f,
-//
-//		1.0f, -1.0f, -1.0f,
-//		1.0f, -1.0f,  1.0f,
-//		1.0f,  1.0f,  1.0f,
-//		1.0f,  1.0f,  1.0f,
-//		1.0f,  1.0f, -1.0f,
-//		1.0f, -1.0f, -1.0f,
-//
-//		-1.0f, -1.0f,  1.0f,
-//		-1.0f,  1.0f,  1.0f,
-//		1.0f,  1.0f,  1.0f,
-//		1.0f,  1.0f,  1.0f,
-//		1.0f, -1.0f,  1.0f,
-//		-1.0f, -1.0f,  1.0f,
-//
-//		-1.0f,  1.0f, -1.0f,
-//		1.0f,  1.0f, -1.0f,
-//		1.0f,  1.0f,  1.0f,
-//		1.0f,  1.0f,  1.0f,
-//		-1.0f,  1.0f,  1.0f,
-//		-1.0f,  1.0f, -1.0f,
-//
-//		-1.0f, -1.0f, -1.0f,
-//		-1.0f, -1.0f,  1.0f,
-//		1.0f, -1.0f, -1.0f,
-//		1.0f, -1.0f, -1.0f,
-//		-1.0f, -1.0f,  1.0f,
-//		1.0f, -1.0f,  1.0f
-//	};
-//
-//	std::vector<std::string> faces
-//	{
-//		"source/skybox/right.jpg",
-//		"source/skybox/left.jpg",
-//		"source/skybox/top.jpg",
-//		"source/skybox/bottom.jpg",
-//		"source/skybox/back.jpg",
-//		"source/skybox/front.jpg"
+//		//---- 位置 ----     --纹理坐标--
+//		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+//		0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+//		0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+//		0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+//		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+//		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+//		
+//		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+//		0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+//		0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+//		0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+//		-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+//		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+//		
+//		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+//		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+//		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+//		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+//		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+//		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+//		
+//		0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+//		0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+//		0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+//		0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+//		0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+//		0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+//		
+//		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+//		0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+//		0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+//		0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+//		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+//		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+//		
+//		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+//		0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+//		0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+//		0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+//		-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+//		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f     
 //	};
 //
 //	//立方体VAO
@@ -207,74 +131,46 @@
 //	glBindVertexArray(cubeVAO);
 //	glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
 //	glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), &cubeVertices, GL_STATIC_DRAW);
-//	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+//	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 //	glEnableVertexAttribArray(0);
-//	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-//	glEnableVertexAttribArray(1);
+//	/*glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+//	glEnableVertexAttribArray(1);*/
 //	glBindVertexArray(0);
 //
-//	//天空盒VO
-//	unsigned skyboxVAO, skyboxVBO;
-//	glGenVertexArrays(1, &skyboxVAO);
-//	glGenBuffers(1, &skyboxVBO);
-//	glBindVertexArray(skyboxVAO);
-//	glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
-//	glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
-//	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-//	glEnableVertexAttribArray(0);
-//
-//
 //	//加载纹理
-//	unsigned int cubeTexture = loadTexture("source/image/marble.jpg");
-//
-//	//加载立方体纹理
-//	unsigned int cubemapTexture = loadCubemap(faces);
+//	unsigned int frontTexture = loadTexture("source/image/marble.jpg");
+//	unsigned int backTexture = loadTexture("source/image/container.jpg");
 //
 //	//编译Shaders
-//	Shader shader("shaders/shader_skybox.vs", "shaders/shader_skybox.fs");
-//	Shader ourShader("shaders/shader_skybox_nanosuit.vs", "shaders/shader_skybox_nanosuit.fs");
+//	/*Shader shader("shaders/shader_advancehlsl.vs", "shaders/shader_advancehlsl.fs");
+//	shader.use();
+//	shader.setUniformValue("frontTexture", 0);
+//	shader.setUniformValue("backTexture", 1);*/
 //
+//	Shader shaderRed("shaders/shader_advancehlsl.vs", "shaders/shader_advance_red.fs");
+//	Shader shaderGreen("shaders/shader_advancehlsl.vs", "shaders/shader_advance_green.fs");
+//	Shader shaderBlue("shaders/shader_advancehlsl.vs", "shaders/shader_advance_blue.fs");
+//	Shader shaderYellow("shaders/shader_advancehlsl.vs", "shaders/shader_advance_yellow.fs");
 //
-//	Shader skyboxShader("shaders/shader_cubemaps.vs", "shaders/shader_cubemaps.fs");
-//	skyboxShader.use();
-//	skyboxShader.setUniformValue("skybox", 0);
+//	shaderRed.setBlock("Matrices", 0);
+//	shaderGreen.setBlock("Matrices", 0);
+//	shaderBlue.setBlock("Matrices", 0);
+//	shaderYellow.setBlock("Matrices", 0);
 //
-//	Model ourModel("objects/nanosuit/nanosuit.obj");
+//	unsigned int uboMatrices;
+//	glGenBuffers(1, &uboMatrices);
+//	glBindBuffer(GL_UNIFORM_BUFFER, uboMatrices);
+//	glBufferData(GL_UNIFORM_BUFFER, 152, nullptr, GL_STATIC_DRAW);	//分配152字节的内存
+//	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 //
+//	glBindBufferRange(GL_UNIFORM_BUFFER, 0, uboMatrices, 0, 2 * sizeof(glm::mat4));
 //
-//	//创建帧缓冲对象
-//	/*unsigned int framebuffer;
-//	glGenFramebuffers(1, &framebuffer);
-//	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);*/
+//	glm::mat4 projection = glm::perspective(45.0f, (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+//	glBindBuffer(GL_UNIFORM_BUFFER, uboMatrices);
+//	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(projection));
+//	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 //
-//	////生成纹理
-//	//unsigned int texColorBuffer;
-//	//glGenTextures(1, &texColorBuffer);
-//	//glBindTexture(GL_TEXTURE_2D, texColorBuffer);
-//	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCR_WIDTH, SCR_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
-//	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//	//glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-//	//glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-//	//glBindTexture(GL_TEXTURE_2D, 0);
-//
-//	////将它附加到当前绑定的帧缓冲对象
-//	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texColorBuffer, 0);
-//
-//	////创建一个渲染缓冲对象
-//	//unsigned int rbo;
-//	//glGenRenderbuffers(1, &rbo);
-//	//glBindRenderbuffer(GL_RENDERBUFFER, rbo);
-//	//glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, SCR_WIDTH, SCR_HEIGHT);
-//	//glBindRenderbuffer(GL_RENDERBUFFER, 0);
-//
-//	////将渲染缓冲对象附加到帧缓冲对象
-//	//glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
-//
-//	//if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-//	//	std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
-//	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
-//
+//	//Model ourModel("objects/nanosuit/nanosuit.obj");
 //
 //
 //	//调用线框模式绘制多边形
@@ -295,68 +191,67 @@
 //		glEnable(GL_DEPTH_TEST);*/
 //
 //		//渲染
-//		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+//		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 //		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 //
-//		shader.use();
+//		glm::mat4 view = camera.GetViewMatrix();
+//		glBindBuffer(GL_UNIFORM_BUFFER, uboMatrices);
+//		glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(view));
+//		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+//
+//		//绘制4个立方体
+//		//Red
+//		glBindVertexArray(cubeVAO);
+//		shaderRed.use();
+//		glm::mat4 model;
+//		model = glm::translate(model, glm::vec3(-0.75, 0.75, 0.0f));
+//		shaderRed.setMat4("model", model);
+//		glDrawArrays(GL_TRIANGLES, 0, 36);
+//		//Green
+//		shaderGreen.use();
+//		model = glm::mat4();
+//		model = glm::translate(model, glm::vec3(0.75f, 0.75f, 0.0f));
+//		shaderGreen.setMat4("model", model);
+//		glDrawArrays(GL_TRIANGLES, 0, 36);
+//		//Blue
+//		shaderBlue.use();
+//		model = glm::mat4();
+//		model = glm::translate(model, glm::vec3(0.75f, -0.75f, 0.0f));
+//		shaderBlue.setMat4("model", model);
+//		glDrawArrays(GL_TRIANGLES, 0, 36);
+//		//Yellow
+//		shaderYellow.use();
+//		model = glm::mat4();
+//		model = glm::translate(model, glm::vec3(-0.75f, -0.75f, 0.0f));
+//		shaderYellow.setMat4("model", model);
+//		glDrawArrays(GL_TRIANGLES, 0, 36);
+//
+//
+//
+//		/*shader.use();
 //		glm::mat4 model;
 //		glm::mat4 view = camera.GetViewMatrix();
 //		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.f);
-//		/*shader.setMat4("model", model);
+//		shader.setMat4("model", model);
 //		shader.setMat4("view", view);
 //		shader.setMat4("projection", projection);
 //		shader.setVec3("cameraPos", camera.Position);
 //		glBindVertexArray(cubeVAO);
 //		glActiveTexture(GL_TEXTURE0);
-//		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+//		glBindTexture(GL_TEXTURE_2D, frontTexture);
+//		glActiveTexture(GL_TEXTURE1);
+//		glBindTexture(GL_TEXTURE_2D, backTexture);
 //		glDrawArrays(GL_TRIANGLES, 0, 36);*/
 //
 //
-//		ourShader.use();
+//		/*ourShader.use();
 //		ourShader.setVec3("viewPos", camera.Position);
 //		ourShader.setMat4("view", view);
 //		ourShader.setMat4("projection", projection);
 //		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f));
 //		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
 //		ourShader.setMat4("model", model);
-//		ourModel.Draw(ourShader);
-//
-//
-//		glDepthFunc(GL_LEQUAL);
-//		skyboxShader.use();
-//		view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
-//		skyboxShader.setMat4("view", view);
-//		skyboxShader.setMat4("projection", projection);
-//		glBindVertexArray(skyboxVAO);
-//		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
-//		glDrawArrays(GL_TRIANGLES, 0, 36);
-//		glDepthFunc(GL_LESS);
-//		
-//
-//		
-//		
-//
-//		//地板
-//		/*glBindVertexArray(planeVAO);
-//		glBindTexture(GL_TEXTURE_2D, planeTexture);
-//		shader.setMat4("model", glm::mat4());
-//		glDrawArrays(GL_TRIANGLES, 0, 6);
-//		glBindVertexArray(0);*/
-//
-//
-//
-//		//处理纹理
-//		/*glBindFramebuffer(GL_FRAMEBUFFER, 0);
-//		glDisable(GL_DEPTH_TEST);
-//		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-//		glClear(GL_COLOR_BUFFER_BIT);
-//
-//		screenShader.use();
-//		glBindVertexArray(quadVAO);
-//		glDisable(GL_DEPTH_TEST);
-//		glActiveTexture(GL_TEXTURE0);
-//		glBindTexture(GL_TEXTURE_2D, texColorBuffer);
-//		glDrawArrays(GL_TRIANGLES, 0, 6);*/
+//		ourModel.Draw(ourShader);*/
 //
 //		//检查并调用事件，交换缓冲
 //		glfwSwapBuffers(window);
