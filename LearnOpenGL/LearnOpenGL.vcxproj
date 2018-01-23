@@ -138,6 +138,7 @@
     <ClCompile Include="mainCulling.cpp" />
     <ClCompile Include="mainDepthTest.cpp" />
     <ClCompile Include="mainFrameBuffers.cpp" />
+    <ClCompile Include="mainGeometry2.cpp" />
     <ClCompile Include="mainGeometryShader.cpp" />
     <ClCompile Include="mainLight.cpp" />
     <ClCompile Include="mainLightCasters.cpp" />
