@@ -153,6 +153,7 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="mainGeometry3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\StdImage\stb_image.h" />
