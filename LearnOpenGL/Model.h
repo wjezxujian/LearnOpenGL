@@ -16,6 +16,8 @@ public:
 		loadModel(path);
 	}
 	void Draw(Shader shader);
+	const std::vector<Mesh>& getMeshes() { return meshes; };
+	const std::vector<Texture>& getTexturesLoaded() { return textures_loaded; }
 
 private:
 	void loadModel(std::string path);

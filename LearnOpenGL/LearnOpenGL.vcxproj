@@ -140,6 +140,9 @@
     <ClCompile Include="mainFrameBuffers.cpp" />
     <ClCompile Include="mainGeometry2.cpp" />
     <ClCompile Include="mainGeometryShader.cpp" />
+    <ClCompile Include="mainInstance1.cpp" />
+    <ClCompile Include="mainInstance2.cpp" />
+    <ClCompile Include="mainInstance3.cpp" />
     <ClCompile Include="mainLight.cpp" />
     <ClCompile Include="mainLightCasters.cpp" />
     <ClCompile Include="mainLightingMaps.cpp" />
