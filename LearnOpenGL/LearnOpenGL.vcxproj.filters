@@ -114,6 +114,9 @@
     <ClCompile Include="mainInstance3.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="mainMass1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
