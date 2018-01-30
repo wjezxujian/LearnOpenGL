@@ -152,6 +152,7 @@
     <ClCompile Include="mainMass3.cpp" />
     <ClCompile Include="mainMaterial.cpp" />
     <ClCompile Include="mainMass2.cpp" />
+    <ClCompile Include="mainPointShadows.cpp" />
     <ClCompile Include="mainShadowMapping.cpp" />
     <ClCompile Include="mainStencilTest.cpp" />
     <ClCompile Include="mainTexture.cpp" />
