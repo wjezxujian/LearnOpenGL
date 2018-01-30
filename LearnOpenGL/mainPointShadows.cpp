@@ -136,7 +136,8 @@ int main()
 	debugDepthQuad.use();
 	debugDepthQuad.setUniformValue("depthMap", 0);
 
-	Shader shader("shaders/5_advanced_lighting/3_2_1_point_shadows/point_shadows.vs", "shaders/5_advanced_lighting/3_2_1_point_shadows/point_shadows.fs");
+	//Shader shader("shaders/5_advanced_lighting/3_2_1_point_shadows/point_shadows.vs", "shaders/5_advanced_lighting/3_2_1_point_shadows/point_shadows.fs");
+	Shader shader("shaders/5_advanced_lighting/3_2_1_point_shadows/point_shadows.vs", "shaders/5_advanced_lighting/3_2_2_point_shadows_soft/point_shadows.fs");
 	shader.use();
 	shader.setBlock("Matrices", 0);
 	shader.setUniformValue("diffuseTexture", 0);
@@ -201,7 +202,7 @@ int main()
 		processInput(window);
 
 		// move light position over time
-		lightPos.z = sin(glfwGetTime() * 0.5) * 3.0;
+		//lightPos.z = sin(glfwGetTime() * 0.5) * 3.0;
 
 		//‰÷»æ
 		//glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
