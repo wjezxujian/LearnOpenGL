@@ -99,14 +99,17 @@ int main()
 	//º”‘ÿŒ∆¿Ì
 	GLuint diffuseMap = loadTexture("source/image/bricks2.jpg");
 	GLuint normalMap = loadTexture("source/image/bricks2_normal.jpg");
-	GLuint heightMap = loadTexture("source/image/brick2_disp.jpg");
+	GLuint heightMap = loadTexture("source/image/bricks2_disp.jpg");
 
 	//±‡“ÎShaders
-	Shader shader("shaders/5_advanced_lighting/4_normal_mapping/normal_mapping.vs", "shaders/5_advanced_lighting/4_normal_mapping/normal_mapping.fs");
+	//Shader shader("shaders/5_advanced_lighting/5_1_parallax_mapping/parallax_mapping.vs", "shaders/5_advanced_lighting/5_1_parallax_mapping/parallax_mapping.fs");
+	Shader shader("shaders/5_advanced_lighting/5_2_parallax_mapping/parallax_mapping.vs", "shaders/5_advanced_lighting/5_2_parallax_mapping/parallax_mapping.fs");
+	//Shader shader("shaders/5_advanced_lighting/5_3_parallax_occlusion_mapping/parallax_mapping.vs", "shaders/5_advanced_lighting/5_3_parallax_occlusion_mapping/parallax_mapping.fs");
 	shader.use();
 	shader.setBlock("Matrices", 0);
 	shader.setUniformValue("diffuseMap", 0);
 	shader.setUniformValue("normalMap", 1);
+	shader.setUniformValue("depthMap", 2);
 
 	//unsigned int uboMatrices;
 	//glGenBuffers(1, &uboMatrices);
@@ -182,12 +185,12 @@ int main()
 		shader.setMat4("view", view);
 		// render normal-mapped quad
 		glm::mat4 model;
-		model = glm::rotate(model, glm::radians((float)glfwGetTime() * -10.0f), glm::normalize(glm::vec3(1.0, 0.0, 1.0))); // rotate the quad to show normal mapping from multiple directions
+		//model = glm::rotate(model, glm::radians((float)glfwGetTime() * -10.0f), glm::normalize(glm::vec3(1.0, 0.0, 1.0))); // rotate the quad to show normal mapping from multiple directions
 		shader.setMat4("model", model);
 		shader.setVec3("viewPos", camera.Position);
 		shader.setVec3("lightPos", lightPos);
 		shader.setUniformValue("heightScale", heightScale);
-		std::cout << heightScale << std::endl;
+		//std::cout << heightScale << std::endl;
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, diffuseMap);
 		glActiveTexture(GL_TEXTURE1);
@@ -491,7 +494,7 @@ void RenderQuad()
 		bitangent2.x = f * (-deltaUV2.x * edge1.x + deltaUV1.x * edge2.x);
 		bitangent2.y = f * (-deltaUV2.x * edge1.y + deltaUV1.x * edge2.y);
 		bitangent2.z = f * (-deltaUV2.x * edge1.z + deltaUV1.x * edge2.z);
-		bitangent2 = glm::normalize(tangent2);
+		bitangent2 = glm::normalize(bitangent2);
 
 		float quadVertices[] = {
 			// positions            // normal         // texcoords  // tangent                          // bitangent
