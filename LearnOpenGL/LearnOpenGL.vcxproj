@@ -153,6 +153,7 @@
     <ClCompile Include="mainMaterial.cpp" />
     <ClCompile Include="mainMass2.cpp" />
     <ClCompile Include="mainNormalMapping.cpp" />
+    <ClCompile Include="mainParallaxMapping.cpp" />
     <ClCompile Include="mainPointShadows.cpp" />
     <ClCompile Include="mainShadowMapping.cpp" />
     <ClCompile Include="mainStencilTest.cpp" />
