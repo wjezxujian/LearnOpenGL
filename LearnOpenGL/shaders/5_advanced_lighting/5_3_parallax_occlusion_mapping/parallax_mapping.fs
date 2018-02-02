@@ -48,9 +48,11 @@ vec2 ParallaxMapping(vec2 texCoords, vec3 viewDir)
 
     // get depth after and before collision for linear interpolation
     float afterDepth = currentDepthMapValue - currentLayerDepth;
-    float beforeDepth = texture(depthMap, prevTexCoords).r - currentLayerDepth + layerDepth;
+    // currentLayerDepth是after层的深度，我们需要得到上一层深度为（currentLayerDepth - layerDepth）
+    float beforeDepth = texture(depthMap, prevTexCoords).r - (currentLayerDepth - layerDepth);
 
     // interpolatin of texture coordinates
+    //afterDepth为负，所以用减法求差值 -a / (-a + -b); 顾如下
     float weight = afterDepth / (afterDepth - beforeDepth);
     vec2 finalTexCoords = prevTexCoords * weight  + currentTexCoords * (1.0 - weight);
 

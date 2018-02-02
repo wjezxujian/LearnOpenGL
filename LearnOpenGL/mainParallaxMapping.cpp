@@ -103,8 +103,8 @@ int main()
 
 	//±‡“ÎShaders
 	//Shader shader("shaders/5_advanced_lighting/5_1_parallax_mapping/parallax_mapping.vs", "shaders/5_advanced_lighting/5_1_parallax_mapping/parallax_mapping.fs");
-	Shader shader("shaders/5_advanced_lighting/5_2_parallax_mapping/parallax_mapping.vs", "shaders/5_advanced_lighting/5_2_parallax_mapping/parallax_mapping.fs");
-	//Shader shader("shaders/5_advanced_lighting/5_3_parallax_occlusion_mapping/parallax_mapping.vs", "shaders/5_advanced_lighting/5_3_parallax_occlusion_mapping/parallax_mapping.fs");
+	//Shader shader("shaders/5_advanced_lighting/5_2_parallax_mapping/parallax_mapping.vs", "shaders/5_advanced_lighting/5_2_parallax_mapping/parallax_mapping.fs");
+	Shader shader("shaders/5_advanced_lighting/5_3_parallax_occlusion_mapping/parallax_mapping.vs", "shaders/5_advanced_lighting/5_3_parallax_occlusion_mapping/parallax_mapping.fs");
 	shader.use();
 	shader.setBlock("Matrices", 0);
 	shader.setUniformValue("diffuseMap", 0);
@@ -185,7 +185,7 @@ int main()
 		shader.setMat4("view", view);
 		// render normal-mapped quad
 		glm::mat4 model;
-		//model = glm::rotate(model, glm::radians((float)glfwGetTime() * -10.0f), glm::normalize(glm::vec3(1.0, 0.0, 1.0))); // rotate the quad to show normal mapping from multiple directions
+		model = glm::rotate(model, glm::radians((float)glfwGetTime() * -10.0f), glm::normalize(glm::vec3(1.0, 0.0, 1.0))); // rotate the quad to show normal mapping from multiple directions
 		shader.setMat4("model", model);
 		shader.setVec3("viewPos", camera.Position);
 		shader.setVec3("lightPos", lightPos);
