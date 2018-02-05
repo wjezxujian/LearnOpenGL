@@ -112,12 +112,12 @@ int main()
 
 	Shader shaderBlur("shaders/5_advanced_lighting/7_bloom/blur.vs", "shaders/5_advanced_lighting/7_bloom/blur.fs");
 	shaderBlur.use();
-	shaderLight.setUniformValue("scene", 0);
-	shaderLight.setUniformValue("bloomBlur", 1);
+	shaderBlur.setUniformValue("image", 0);
 
 	Shader shaderBloomFinal("shaders/5_advanced_lighting/7_bloom/bloom_final.vs", "shaders/5_advanced_lighting/7_bloom/bloom_final.fs");
 	shaderBloomFinal.use();
-	shaderBloomFinal.setUniformValue("diffuseTexture", 0);
+	shaderBloomFinal.setUniformValue("scene", 0);
+	shaderBloomFinal.setUniformValue("bloomBlur", 1);
 
 	// configure floating point framebuffer
 	unsigned int hdrFBO;
@@ -125,6 +125,7 @@ int main()
 	glBindFramebuffer(GL_FRAMEBUFFER, hdrFBO);
 	// create 2 floating point color buffers (1 for normal rendering, other for brightness treshold values)
 	unsigned int colorBuffers[2];
+	glGenTextures(2, colorBuffers);
 	for (unsigned int i = 0; i < 2; ++i)
 	{
 		glBindTexture(GL_TEXTURE_2D, colorBuffers[i]);
@@ -304,7 +305,7 @@ int main()
 			glBindFramebuffer(GL_FRAMEBUFFER, pingpongFBO[horizontal]);
 			shaderBlur.setUniformValue("horizontal", horizontal);
 			glBindTexture(GL_TEXTURE_2D, first_iteration ? colorBuffers[1] : pingpongColorbuffers[!horizontal]);  // bind texture of other framebuffer (or scene if first iteration)
-			RenderCube();
+			RenderQuad();
 			horizontal = !horizontal;
 			if (first_iteration)
 				first_iteration = false;
@@ -323,7 +324,7 @@ int main()
 		shaderBloomFinal.setUniformValue("exposure", exposure);
 		RenderQuad();
 
-		//std::cout << "bloom: " << (bloom ? "on" : "off") << "| exposure: " << exposure << std::endl;
+		std::cout << "bloom: " << (bloom ? "on" : "off") << "| exposure: " << exposure << std::endl;
 
 
 
