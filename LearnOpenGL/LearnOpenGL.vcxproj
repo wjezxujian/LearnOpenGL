@@ -131,6 +131,7 @@
     <ClCompile Include="mainAdvanceLighting.cpp" />
     <ClCompile Include="mainAssimp.cpp" />
     <ClCompile Include="mainBlending.cpp" />
+    <ClCompile Include="mainBloom.cpp" />
     <ClCompile Include="mainCamera.cpp" />
     <ClCompile Include="mainCameraClass.cpp" />
     <ClCompile Include="mainCoordSys.cpp" />
